@@ -28,7 +28,8 @@ function App() {
   const loadInitialData = async () => {
     try {
       console.log('Loading initial data...');
-      console.log('API Base URL:', import.meta.env.VITE_API_BASE_URL);
+      console.log('Environment:', import.meta.env.MODE);
+      console.log('API Base URL from env:', import.meta.env.VITE_API_BASE_URL);
       
       // Try health check first
       console.log('Checking health...');
@@ -49,7 +50,9 @@ function App() {
         message: err.message,
         response: err.response?.data,
         status: err.response?.status,
-        config: err.config
+        config: err.config?.url,
+        baseURL: err.config?.baseURL,
+        fullURL: err.config?.baseURL + err.config?.url
       });
       setError(`Failed to connect to the server. Please check if the backend is running. Error: ${err.message}`);
     }

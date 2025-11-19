@@ -104,12 +104,24 @@ CORS_ALLOWED_ORIGINS = [
     "http://127.0.0.1:3000",
     "http://localhost:5173",
     "http://127.0.0.1:5173",
-    "https://your-vercel-app.vercel.app",  # Add your Vercel URL here
 ]
 
-# Allow all origins in production (you can restrict this later)
-if not DEBUG:
-    CORS_ALLOW_ALL_ORIGINS = True
+# Allow all origins in production for now (you can restrict this later)
+CORS_ALLOW_ALL_ORIGINS = True
+
+# Additional CORS settings for production
+CORS_ALLOW_CREDENTIALS = True
+CORS_ALLOWED_HEADERS = [
+    'accept',
+    'accept-encoding',
+    'authorization',
+    'content-type',
+    'dnt',
+    'origin',
+    'user-agent',
+    'x-csrftoken',
+    'x-requested-with',
+]
 
 CORS_ALLOW_CREDENTIALS = True
 
