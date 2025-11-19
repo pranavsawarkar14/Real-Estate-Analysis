@@ -1,1 +1,1 @@
-web: bash start.sh
+web: cd backend && python manage.py collectstatic --noinput && python manage.py migrate --noinput && gunicorn realestatebot.wsgi:application --bind 0.0.0.0:$PORT
