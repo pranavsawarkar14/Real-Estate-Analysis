@@ -27,16 +27,31 @@ function App() {
 
   const loadInitialData = async () => {
     try {
-      const [healthResponse, areasResponse] = await Promise.all([
-        checkHealth(),
-        getAreas()
-      ]);
+      console.log('Loading initial data...');
+      console.log('API Base URL:', import.meta.env.VITE_API_BASE_URL);
       
+      // Try health check first
+      console.log('Checking health...');
+      const healthResponse = await checkHealth();
+      console.log('Health response:', healthResponse.data);
       setHealthStatus(healthResponse.data);
+      
+      // Then get areas
+      console.log('Getting areas...');
+      const areasResponse = await getAreas();
+      console.log('Areas response:', areasResponse.data);
       setAreas(areasResponse.data.areas || []);
+      
+      console.log('Initial data loaded successfully');
     } catch (err) {
       console.error('Failed to load initial data:', err);
-      setError('Failed to connect to the server. Please check if the backend is running.');
+      console.error('Error details:', {
+        message: err.message,
+        response: err.response?.data,
+        status: err.response?.status,
+        config: err.config
+      });
+      setError(`Failed to connect to the server. Please check if the backend is running. Error: ${err.message}`);
     }
   };
 

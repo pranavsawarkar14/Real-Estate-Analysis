@@ -13,7 +13,8 @@ const api = axios.create({
 // Request interceptor for debugging
 api.interceptors.request.use(
   (config) => {
-    console.log('API Request:', config.method?.toUpperCase(), config.url);
+    console.log('API Request:', config.method?.toUpperCase(), config.baseURL + config.url);
+    console.log('Full URL:', config.baseURL + config.url);
     return config;
   },
   (error) => {
@@ -24,10 +25,17 @@ api.interceptors.request.use(
 // Response interceptor for error handling
 api.interceptors.response.use(
   (response) => {
+    console.log('API Response:', response.status, response.data);
     return response;
   },
   (error) => {
-    console.error('API Error:', error.response?.data || error.message);
+    console.error('API Error Details:', {
+      message: error.message,
+      response: error.response?.data,
+      status: error.response?.status,
+      url: error.config?.url,
+      baseURL: error.config?.baseURL
+    });
     return Promise.reject(error);
   }
 );
