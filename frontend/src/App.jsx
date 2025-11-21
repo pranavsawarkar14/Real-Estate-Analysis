@@ -7,6 +7,7 @@ import FileUpload from './components/FileUpload';
 import { queryData, getAreas, checkHealth } from './services/api';
 
 function App() {
+  // Updated API endpoints with trailing slashes - v1.1
   const [results, setResults] = useState(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
@@ -30,9 +31,11 @@ function App() {
       console.log('Loading initial data...');
       console.log('Environment:', import.meta.env.MODE);
       console.log('API Base URL from env:', import.meta.env.VITE_API_BASE_URL);
+      console.log('All env vars:', import.meta.env);
       
       // Try health check first
       console.log('Checking health...');
+      console.log('About to call health endpoint...');
       const healthResponse = await checkHealth();
       console.log('Health response:', healthResponse.data);
       setHealthStatus(healthResponse.data);
