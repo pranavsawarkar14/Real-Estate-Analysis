@@ -1,26 +1,9 @@
 import axios from 'axios';
 
-// Try multiple ways to get the API URL
-const getApiBaseUrl = () => {
-  // First try the environment variable
-  if (import.meta.env.VITE_API_BASE_URL) {
-    return import.meta.env.VITE_API_BASE_URL;
-  }
-  
-  // If in production and no env var, use the known production URL
-  if (import.meta.env.PROD) {
-    return 'https://real-estate-analysis-9a3x.onrender.com/api';
-  }
-  
-  // Default to localhost for development
-  return 'http://localhost:8000/api';
-};
+// For now, hardcode the production URL to ensure it works
+const API_BASE_URL = 'https://real-estate-analysis-9a3x.onrender.com/api';
 
-const API_BASE_URL = getApiBaseUrl();
-
-console.log('API Base URL determined:', API_BASE_URL);
-console.log('Environment mode:', import.meta.env.MODE);
-console.log('Is production:', import.meta.env.PROD);
+console.log('Final API Base URL:', API_BASE_URL);
 
 const api = axios.create({
   baseURL: API_BASE_URL,
