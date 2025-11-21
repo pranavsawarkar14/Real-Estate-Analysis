@@ -41,14 +41,14 @@ api.interceptors.response.use(
 );
 
 export const queryData = (query) => {
-  return api.post('/query', { query });
+  return api.post('/query/', { query });
 };
 
 export const uploadFile = (file) => {
   const formData = new FormData();
   formData.append('file', file);
   
-  return api.post('/upload', formData, {
+  return api.post('/upload/', formData, {
     headers: {
       'Content-Type': 'multipart/form-data',
     },
@@ -60,24 +60,24 @@ export const downloadData = (area = '', format = 'csv') => {
   if (area) params.append('area', area);
   params.append('format', format);
   
-  return api.get(`/download?${params.toString()}`, {
+  return api.get(`/download/?${params.toString()}`, {
     responseType: 'blob',
   });
 };
 
 export const downloadSampleDataset = () => {
   // Download the sample dataset from the backend
-  return api.get('/download-sample', {
+  return api.get('/download-sample/', {
     responseType: 'blob',
   });
 };
 
 export const getAreas = () => {
-  return api.get('/areas');
+  return api.get('/areas/');
 };
 
 export const checkHealth = () => {
-  return api.get('/health');
+  return api.get('/health/');
 };
 
 export default api;

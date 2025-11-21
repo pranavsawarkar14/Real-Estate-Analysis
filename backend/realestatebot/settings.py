@@ -125,6 +125,9 @@ CORS_ALLOWED_HEADERS = [
 
 CORS_ALLOW_CREDENTIALS = True
 
+# Automatically append trailing slashes to URLs
+APPEND_SLASH = True
+
 MEDIA_URL = '/media/'
 MEDIA_ROOT = BASE_DIR / 'media'
 
